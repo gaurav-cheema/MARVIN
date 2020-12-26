@@ -1,0 +1,8 @@
+alert
+egrep
+fgrep
+grep
+l
+la
+ll
+ls
