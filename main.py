@@ -71,7 +71,7 @@ while True:
 
         # NOTE_STRS = ["make a note", "take note", "remember", "notepad"]
         # if audioText[0] in NOTE_STRS:
-            
+        
         SEARCH_STRS = ["google", "search"]
         for string in SEARCH_STRS:
             if string in audioInput:
@@ -89,3 +89,7 @@ while True:
 #     main()
 #     service = google_calendar.authenticate_google_calendar()
 #     google_calendar.get_google_calendar_events(5, service)
+
+commands = [
+    []
+]
