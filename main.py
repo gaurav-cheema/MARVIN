@@ -15,6 +15,7 @@ import pyttsx3
 import numpy as np
 import speech_recognition as sr
 import subprocess
+import webbrowser
 # ------
 
 import sys
@@ -41,8 +42,8 @@ def speak(text):
 def get_audio():
     r = sr.Recognizer()
     with sr.Microphone() as source:
-        r.adjust_for_ambient_noise(source)
-        os.system('play -nq -t alsa synth {} sine {}'.format(0.5, 440))
+        # r.adjust_for_ambient_noise(source)
+        # os.system('play -nq -t alsa synth {} sine {}'.format(0.5, 440))
         audio = r.listen(source)
         said = ""
 
@@ -53,7 +54,7 @@ def get_audio():
         
     return said.lower()
 
-
+WAKE_WORD = "hey jarvis"
 
 while True:
 
@@ -61,13 +62,22 @@ while True:
     audioInput = get_audio()
 
     if audioInput.count(WAKE_WORD) > 0:
-        os.system('play -nq -t alsa synth {} sine {}'.format(0.5, 440))
+        # os.system('play -nq -t alsa synth {} sine {}'.format(0.5, 440))
+        speak("How can I help")
         audioInput = get_audio()
         audioText = audioInput.split(' ')
 
-        NOTE_STRS = ["make a note", "take note", "remember", "notepad"]
-        if audioText[0] in NOTE_STRS:
+        print(audioInput)
+
+        # NOTE_STRS = ["make a note", "take note", "remember", "notepad"]
+        # if audioText[0] in NOTE_STRS:
             
+        SEARCH_STRS = ["google", "search"]
+        for string in SEARCH_STRS:
+            if string in audioInput:
+                query = audioInput.split(' ', 1)[1]
+                url = 'https://google.com/search?q=' + query
+                webbrowser.get().open(url)
 
         COMMAND_STRS = ["run", "open", "execute"]
         if audioText[0] in COMMAND_STRS:
