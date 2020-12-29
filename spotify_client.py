@@ -30,25 +30,28 @@ token = util.prompt_for_user_token(username=USERNAME,
 sp = spotipy.Spotify(token)
 
 devices = sp.devices()
-print(devices)
 
-def next_song():
+def next_song(text = None):
     sp.next_track()
 
-def previous_song():
+def previous_song(text=None):
     sp.previous_track()
 
-def pause():
+def pause(text=None):
     sp.pause_playback()
 
-def play():
+def play(text=None):
     sp.start_playback
 
-def mute():
+def mute(text=None):
     sp.volume(0)
 
-def unmute():
+def unmute(text=None):
     sp.volume(50)
 
-def fullVolume():
+def fullVolume(text=None):
     sp.volume(100)
+
+
+if __name__ == "__main__":
+    print(devices)

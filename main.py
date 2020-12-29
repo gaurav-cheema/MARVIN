@@ -9,7 +9,7 @@ from program_execution import executeProgram
 # ------
 
 # ------ Python packages
-import os
+import os, sys
 import time
 import pyttsx3
 import numpy as np
@@ -18,7 +18,6 @@ import subprocess
 import webbrowser
 # ------
 
-import sys
 
 # from module_imports import *
 
@@ -72,17 +71,10 @@ while True:
         # NOTE_STRS = ["make a note", "take note", "remember", "notepad"]
         # if audioText[0] in NOTE_STRS:
         
-        SEARCH_STRS = ["google", "search"]
-        for string in SEARCH_STRS:
-            if string in audioInput:
-                query = audioInput.split(' ', 1)[1]
-                url = 'https://google.com/search?q=' + query
-                webbrowser.get().open(url)
-
-        COMMAND_STRS = ["run", "open", "execute"]
-        if audioText[0] in COMMAND_STRS:
-            executeProgram(audioText[1])
-
+        # COMMAND_STRS = ["run", "open", "execute"]
+        # if audioText[0] in COMMAND_STRS:
+        #     executeProgram(audioText[1])
+        
 
 # Really cool stuff. The code below in this condition is only executed if this file is run directly. If the file is imported to another file, the code is not excuted. This helps if we only need the functions from this file in another file. so we can write tests under this condition; and they are only executed if this file is run directly.
 # if __name__ == '__main__':
@@ -90,6 +82,3 @@ while True:
 #     service = google_calendar.authenticate_google_calendar()
 #     google_calendar.get_google_calendar_events(5, service)
 
-commands = [
-    []
-]
