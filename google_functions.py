@@ -5,6 +5,8 @@ import os.path
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
+import webbrowser
+
 
 def authenticate_google_calendar():
     """Shows basic usage of the Google Calendar API.
@@ -33,9 +35,10 @@ def authenticate_google_calendar():
 
     return service
 
-def get_google_calendar_events(howMany, service):
+
+def get_google_calendar_events(howMany, service, text=None):
     # Call the Calendar API
-    now = datetime.datetime.utcnow().isoformat() + 'Z' # 'Z' indicates UTC time
+    now = datetime.datetime.utcnow().isoformat() + 'Z'  # 'Z' indicates UTC time
     print('Getting the upcoming 10 events')
     events_result = service.events().list(calendarId='primary', timeMin=now,
                                         maxResults=10, singleEvents=True,
@@ -47,3 +50,9 @@ def get_google_calendar_events(howMany, service):
     for event in events:
         start = event['start'].get('dateTime', event['start'].get('date'))
         print(start, event['summary'])
+
+
+def google_search(text):
+    query = text.split(' ', 1)[1]
+    url = 'https://google.com/search?q=' + query
+    webbrowser.get().open(url)
