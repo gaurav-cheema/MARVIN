@@ -1,4 +1,7 @@
 from collections import deque
+import google_functions
+import program_execution
+import command_strings
 
 mainNodes = []
 
@@ -7,7 +10,7 @@ class TreeNode():
     global mainNodes
 
     def __init__(self, name="", func=None, buzzwords=[], childNodes=[]):
-        self.buzzwords = []
+        self.buzzwords = buzzwords
         self.childNodes = childNodes
         self.func = func
         self.name = name
@@ -44,9 +47,9 @@ def check_tree(text):
         for i in node.buzzwords:
             if i in text:
                 for child in node.childNodes:
-                    for j in node.childNodes.buzzwords:
+                    for j in child.buzzwords:
                         if j in text:
-                            node.childNodes.func(text)
+                            child.func(text)
                             return True
 
 
@@ -64,6 +67,11 @@ def make_tree(someDict):
                 if isinstance(currDict[key][key2], list):
                     pass
                 if isinstance(currDict[key][key2], dict):
-                    newChild = TreeNode(key2, currDict[key][key2], currDict[key][key2]["strings"], [])
+                    newChild = TreeNode(key2, currDict[key][key2]["command"], currDict[key][key2]["strings"], [])
                     newNode.add_child(newChild)
                     mainNodes.pop()
+
+
+if __name__ == "__main__":
+    make_tree(command_strings.command_strs)
+    check_tree("open discord")

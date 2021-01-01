@@ -50,13 +50,17 @@ command_strs = {
             "command": google_functions.google_search}
         },
 
-    "run": {
-        "buzzwords": ["run", "open", "execute"],
+    "process handling": {
+        "buzzwords": ["run", "open", "execute", "terminate", "kill"],
 
         "execute": {
             "strings": ["run", "open", "execute"],
-            "command": program_execution.executeProgram}
-        }
+            "command": program_execution.executeProgram},
+
+        "terminate": {
+            "strings": ["stop", "end", "terminate", "kill"],
+            "command": program_execution.terminateProgram}
+    }
 }
 
 
@@ -80,8 +84,8 @@ def checkCommands(someDict, text):
         r = checkCommands(subdict, text)
 
 
-if not __name__ == "__main__":
-    data_struct.make_tree(command_strs)
+# if not __name__ == "__main__":
+#     data_struct.make_tree(command_strs)
 
 
 if __name__ == "__main__":

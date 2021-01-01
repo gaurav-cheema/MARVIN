@@ -3,9 +3,8 @@ from __future__ import print_function
 # ------
 
 # ------ My Packages
-import google_calendar
-import string_distance
-from program_execution import executeProgram
+import data_struct
+import command_strings
 # ------
 
 # ------ Python packages
@@ -14,8 +13,6 @@ import time
 import pyttsx3
 import numpy as np
 import speech_recognition as sr
-import subprocess
-import webbrowser
 # ------
 
 
@@ -34,6 +31,7 @@ NEAT IDEA: instead of the first word of the input being "execute" to execute a p
 
 def speak(text):
     engine = pyttsx3.init()
+    engine.setProperty('rate', 150)
     engine.say(text)
     engine.runAndWait()
 
@@ -53,7 +51,9 @@ def get_audio():
         
     return said.lower()
 
+data_struct.make_tree(command_strings.command_strs)
 WAKE_WORD = "hey jarvis"
+data_struct.check_tree("kill spotify")
 
 while True:
 
@@ -66,15 +66,12 @@ while True:
         audioInput = get_audio()
         audioText = audioInput.split(' ')
 
+        data_struct.check_tree(audioInput)       
         print(audioInput)
 
         # NOTE_STRS = ["make a note", "take note", "remember", "notepad"]
         # if audioText[0] in NOTE_STRS:
-        
-        # COMMAND_STRS = ["run", "open", "execute"]
-        # if audioText[0] in COMMAND_STRS:
-        #     executeProgram(audioText[1])
-        
+                
 
 # Really cool stuff. The code below in this condition is only executed if this file is run directly. If the file is imported to another file, the code is not excuted. This helps if we only need the functions from this file in another file. so we can write tests under this condition; and they are only executed if this file is run directly.
 # if __name__ == '__main__':
