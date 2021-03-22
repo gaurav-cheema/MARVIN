@@ -2,7 +2,7 @@ import subprocess
 
 def executeProgram(text):
     process = isolate_processName(text)
-    subprocess.call(process)
+    subprocess.run(process, shell = True)
 
 
 def terminateProgram(text):
