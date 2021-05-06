@@ -59,17 +59,18 @@ command_strs = {
             "freq": 0}
         },
 
-    "google": {
+    "search": {
         "command": None,
         "visits": 0,
         "strings": ["google", "search", "look up"],
         "freq": 0,
 
-        "search": {
+        "google": {
             "visits": 0,
             "strings": ["search", "google", "look up"], 
             "command": google_functions.google_search,
-            "freq": 0}
+            "freq": 0
+            }
         },
 
     "process handling": {
@@ -96,37 +97,38 @@ command_strs = {
 """
 This function checks every string. It doesnt use strings to narrow down to the type of the program used. Instead, it recurses over every string to find a match.
 """
-breakRecursion = False
-def checkCommands(someDict, text):
-    global breakRecursion
-    if breakRecursion: return None
-    if not isinstance(someDict, dict): return None
+# breakRecursion = False
+# def checkCommands(someDict, text):
+#     global breakRecursion
+#     if breakRecursion: return None
+#     if not isinstance(someDict, dict): return None
 
-    if "strings" in someDict.keys():
-        for entry in someDict["strings"]:
-            if entry in text:
-                someDict["command"](text)
-                print("success")
-                breakRecursion = True
+#     if "strings" in someDict.keys():
+#         for entry in someDict["strings"]:
+#             if entry in text:
+#                 someDict["command"](text)
+#                 print("success")
+#                 breakRecursion = True
     
-    for subdict in someDict.values():
-        r = checkCommands(subdict, text)
+#     for subdict in someDict.values():
+#         r = checkCommands(subdict, text)
 
 
-# if not __name__ == "__main__":
-#     data_struct.make_tree(command_strs)
+# # if not __name__ == "__main__":
+# #     data_struct.make_tree(command_strs)
 
-def get_all_values(nested_dictionary):
-    for key, value in nested_dictionary.items():
-        if type(value) is dict:
-            get_all_values(value)
-        else:
-            print(key, ":", value)
+# def get_all_values(nested_dictionary):
+#     for key, value in nested_dictionary.items():
+#         if type(value) is dict:
+#             get_all_values(value)
+#         else:
+#             print(key, ":", value)
 
 
 if __name__ == "__main__":
+    print()
     # data_struct.make_tree(command_strs)
     # for i in data_struct.mainNodes:
     #     i.print_tree()
-    myprint(command_strs)
-    
+    # myprint(command_strs)
+ 

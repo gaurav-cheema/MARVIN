@@ -2,9 +2,12 @@ from collections import deque, defaultdict
 # import google_functions
 import program_execution
 import command_strings
+import logging
 
 
 import sys, os, psutil
+
+logging.basicConfig(level=logging.DEBUG)
 
 mainNodes = []
 
@@ -105,6 +108,7 @@ def dfs(node, text):
     stack = deque()
     stack.append(node)
 
+    # baseLayerAdded var exists to make sure that there are always nodes in the stack until the search ends or the function executes.
     baseLayerAdded = False
     buzzwordMatch = False
     # visited = set()
@@ -113,6 +117,8 @@ def dfs(node, text):
 
     while stack:
         vertex = stack.pop()
+
+        logging.info("vertex: " + vertex.name)
 
         if (not baseLayerAdded):
             baseLayerAdded = True
@@ -123,8 +129,10 @@ def dfs(node, text):
         HUGE PROBLEM: NOT ANYMORE
         THIS IS TRUE DFS. WE WANT LEVEL ORDER
         """
-        
+
         for string in vertex.buzzwords:
+
+            logging.info("Checking string: " + string)
 
             # if buzzword is in the input
             if string in text:
@@ -161,28 +169,28 @@ def dfs(node, text):
                     # if (root.freq % 11 == 0):
                     #     rebalance(root)
                     #     root.freq = 1
-                    
+
                     # Once the func has been found and executed, break loop
                     break
-            
+
             if (not baseLayerAdded == True):
                 for child in vertex.childNodes:
                     stack.append(child)
-        
+
         else:
             continue
 
         break
 
     stack.clear()
-    
+
 
 if __name__ == "__main__":
     root = TreeNode("root", None, [], [], 0)
     makeTree(command_strings.command_strs, root)
-    root.print_tree()
-    print(type("execute chrome"))
-    dfs(root, "google dogs")
+    # root.print_tree()
+    # print(type("execute chrome"))
+    dfs(root, "search code")
 
 
 if not __name__ == "__main__":
