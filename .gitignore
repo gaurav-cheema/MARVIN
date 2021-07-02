@@ -1,3 +1,14 @@
+# AUTH files
 credentials.py
 token.pickle
 .cache-atomicknight002
+
+# OBJECT fiels
+*.pyc
+
+# Tester, Scrap, Intermediary files
+rough.py
+functionTester.py
+
+# IDEAS
+ide.txt

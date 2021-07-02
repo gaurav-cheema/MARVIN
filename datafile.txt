@@ -1,0 +1,13 @@
+{
+    name
+    buzzwords list
+    func
+    visited frequency
+    {
+        name
+        buzzwords list
+        func
+        visited frequency
+    }
+
+}
