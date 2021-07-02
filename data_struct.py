@@ -10,10 +10,12 @@ import sys, os, psutil
 logging.basicConfig(level=logging.DEBUG)
 
 mainNodes = []
+# root = TreeNode("root", None, [], [], 0)
 
 class TreeNode():
 
     global mainNodes
+    global root
 
     def __init__(self, name="", func=None, buzzwords=[], childNodes=[], freq = 0):
         self.buzzwords = buzzwords
@@ -104,7 +106,7 @@ def makeTree(d, node):
             then, dont add its children to the stack, thereby skipping over its entire tree.
     """
 
-def dfs(node, text):
+def check_tree(text, node):
     stack = deque()
     stack.append(node)
 
@@ -122,7 +124,7 @@ def dfs(node, text):
 
         if (not baseLayerAdded):
             baseLayerAdded = True
-            for child in reversed(root.childNodes):
+            for child in reversed(vertex.childNodes):
                 stack.append(child)
 
         """
@@ -188,11 +190,12 @@ def dfs(node, text):
 if __name__ == "__main__":
     root = TreeNode("root", None, [], [], 0)
     makeTree(command_strings.command_strs, root)
-    # root.print_tree()
+    root.print_tree()
     # print(type("execute chrome"))
-    dfs(root, "search code")
+    check_tree("next song", root)
 
 
 if not __name__ == "__main__":
+    root = TreeNode("root", None, [], [], 0)
     makeTree(command_strings.command_strs, root)
     root.print_tree()

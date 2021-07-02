@@ -26,7 +26,6 @@ NEAT IDEA: instead of the first word of the input being "execute" to execute a p
     This eliminates several other issues.
 """
 
-
 def speak(text):
     engine = pyttsx3.init()
     engine.setProperty('rate', 150)
@@ -47,12 +46,9 @@ def get_audio():
             said = r.recognize_google(audio)
         except Exception as e:
             print("Exception: " + str(e))
-        
+
     return said.lower()
 
-data_struct.make_tree(command_strings.command_strs)
-WAKE_WORD = "jfj"
-data_struct.check_tree("kill spotify")
 
 # while True:
 
@@ -65,12 +61,12 @@ data_struct.check_tree("kill spotify")
 #         audioInput = get_audio()
 #         audioText = audioInput.split(' ')
 
-#         data_struct.check_tree(audioInput)       
+#         data_struct.check_tree(audioInput)
 #         print(audioInput)
 
-        # NOTE_STRS = ["make a note", "take note", "remember", "notepad"]
-        # if audioText[0] in NOTE_STRS:
-                
+# NOTE_STRS = ["make a note", "take note", "remember", "notepad"]
+# if audioText[0] in NOTE_STRS:
+
 
 # while True:
 #     keyInput = input("VISION is listening: ")
@@ -85,22 +81,26 @@ data_struct.check_tree("kill spotify")
 #         print(keyInput)
 
 
-# Really cool stuff. The code below in this condition is only executed if this file is run directly. If the file is imported to another file, the code is not excuted. This helps if we only need the functions from this file in another file. so we can write tests under this condition; and they are only executed if this file is run directly.
 if __name__ == '__main__':
+    WAKE_WORD = "marvin"
+
+    root = data_struct.TreeNode("root", None, [], [], 0)
+    data_struct.makeTree(command_strings.command_strs, root)
+    # data_struct.check_tree(root, "kill spotify")
+
 
     while True:
         keyInput = input("VISION is listening: ")
 
-    if keyInput.count(WAKE_WORD) > 0:
-        # os.system('play -nq -t alsa synth {} sine {}'.format(0.5, 440))
-        speak("How can I help")
-        keyInput = input("Enter a command: ")
-        keyText = keyInput.split(' ')
+        if keyInput.count(WAKE_WORD) > 0:
+            os.system('play -nq -t alsa synth {} sine {}'.format(0.4, 440))
+            # speak("How can I help")
+            keyInput = input("Enter a command: ")
+            # keyText = keyInput.split(' ')
 
-        data_struct.check_tree(keyInput)
-        print(keyInput)
+            data_struct.check_tree(keyInput, root)
+            print(keyInput)
 
 #     main()
 #     service = google_calendar.authenticate_google_calendar()
 #     google_calendar.get_google_calendar_events(5, service)
-
